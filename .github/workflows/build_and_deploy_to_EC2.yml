@@ -6,13 +6,46 @@ on:
     branches:
       - master
 
+env: 
+# set apppool and site name from IIS
+  AppPoolName : DefaultAppPool
+  SiteName  : 'Default Web Site'
+  SitePublishName  :  'DefaultWebSite'
+# set to site files.  In this case, the part of the path after f:/websites/
+  SitePath :  MainWebsite
+
+  #TEST_DOTNET_VERSION: "8.0.x"
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Windows-2022
 
     steps:
       - name: "Mostrar mensaje"
-        run: echo "Ejecutando Workflow"
+        run: echo "Checkout repo"
     
-      
+      - uses: actions/checkout@v4 
   
+      - name: Build
+        run: dotnet build --configuration Release .
+      - name: dotnet publish 
+        run: | 
+          dotnet publish -c Release -o ${{env.SitePublishName}}Publish .
+
+      #- name: Look for app_offline add as needed
+      #  run: |
+      #    try{Get-Item C:/inetpub/wwwroot/${{env.SitePath}}/app_offline.htm}
+      #    catch{
+      #      Copy-Item C:/inetpub/wwwroot/Offline/app_offline.htm C:/inetpub/wwwroot/${{env.SitePath}} -Recurse -Force  
+      #    }
+
+
+
+
+
+
+
+
+
+
+
