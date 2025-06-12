@@ -32,6 +32,13 @@ jobs:
         run: | 
           dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
+      #- name: Deploy to IIS
+      #  run: |
+      #    iisreset /stop
+      #    Copy-Item ./WeatherAPI/* C:/inetpub/wwwroot/WeatherAPI -Recurse -Force
+      #    iisreset /start
+
+
       #- name: Look for app_offline add as needed
       #  run: |
       #    try{Get-Item C:/inetpub/wwwroot/${{env.SitePath}}/app_offline.htm}
