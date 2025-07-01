@@ -1,50 +1,60 @@
-name: Deploying to EC2 AWS
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-
-env: 
-# set apppool and site name from IIS
-  AppPoolName : DefaultAppPool
-  SiteName  : 'Default Web Site'
-  SitePublishName  :  'DefaultWebSite'
-# set to site files.  In this case, the part of the path after f:/websites/
-  SitePath :  MainWebsite
-
-  #TEST_DOTNET_VERSION: "8.0.x"
-
+name: Hello World
+on: [push]
 jobs:
-  build:
-    runs-on: Windows-2022
-
+  Hello-World-Job:
+    runs-on:
+      - codebuild-WeatherAPIGithubToCodeBuildProject-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-      - name: "Mostrar mensaje"
-        run: echo "Checkout repo"
+      - run: echo "Hello World"
+
+
+#name: Deploying to EC2 AWS
+
+#on:
+#  workflow_dispatch:
+#  push:
+#    branches:
+#      - master
+
+#env: 
+## set apppool and site name from IIS
+#  AppPoolName : DefaultAppPool
+#  SiteName  : 'Default Web Site'
+#  SitePublishName  :  'DefaultWebSite'
+## set to site files.  In this case, the part of the path after f:/websites/
+#  SitePath :  MainWebsite
+
+#  #TEST_DOTNET_VERSION: "8.0.x"
+
+#jobs:
+#  build:
+#    runs-on: Windows-2022
+
+#    steps:
+#      - name: "Mostrar mensaje"
+#        run: echo "Checkout repo"
     
-      - uses: actions/checkout@v4 
+#      - uses: actions/checkout@v4 
   
-      - name: Build
-        run: dotnet build --configuration Release .\WeatherAPI
-      - name: dotnet publish 
-        run: | 
-          dotnet publish -c Release -o WeatherAPI .\WeatherAPI
+#      - name: Build
+#        run: dotnet build --configuration Release .\WeatherAPI
+#      - name: dotnet publish 
+#        run: | 
+#          dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
-      #- name: Deploy to IIS
-      #  run: |
-      #    iisreset /stop
-      #    Copy-Item ./WeatherAPI/* C:/inetpub/wwwroot/WeatherAPI -Recurse -Force
-      #    iisreset /start
+#      #- name: Deploy to IIS
+#      #  run: |
+#      #    iisreset /stop
+#      #    Copy-Item ./WeatherAPI/* C:/inetpub/wwwroot/WeatherAPI -Recurse -Force
+#      #    iisreset /start
 
 
-      #- name: Look for app_offline add as needed
-      #  run: |
-      #    try{Get-Item C:/inetpub/wwwroot/${{env.SitePath}}/app_offline.htm}
-      #    catch{
-      #      Copy-Item C:/inetpub/wwwroot/Offline/app_offline.htm C:/inetpub/wwwroot/${{env.SitePath}} -Recurse -Force  
-      #    }
+#      #- name: Look for app_offline add as needed
+#      #  run: |
+#      #    try{Get-Item C:/inetpub/wwwroot/${{env.SitePath}}/app_offline.htm}
+#      #    catch{
+#      #      Copy-Item C:/inetpub/wwwroot/Offline/app_offline.htm C:/inetpub/wwwroot/${{env.SitePath}} -Recurse -Force  
+#      #    }
 
 
 
