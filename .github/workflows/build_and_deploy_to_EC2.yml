@@ -3,9 +3,9 @@ on: [push]
 jobs:
   Hello-World-Job:
     runs-on:
-      - codebuild-WeatherAPIGithubToCodeBuildProject-${{ github.run_id }}-${{ github.run_attempt }}
+      - codebuild-WebAPIGithubProject-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-      - run: echo "Hello World!"
+      - run: echo "Hello World"
 
 
 #name: Deploying to EC2 AWS
