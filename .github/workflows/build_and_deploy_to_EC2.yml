@@ -1,47 +1,47 @@
-name: Hello World
-on: [push]
-jobs:
-  Hello-World-Job:
-    runs-on:
-      - self-hosted
-      #- codebuild-WeatherAPICodeBuildProject-${{ github.run_id }}-${{ github.run_attempt }}
-    steps:
-      - run: echo "Hello World"
+#name: Hello World
+#on: [push]
+#jobs:
+#  Hello-World-Job:
+#    runs-on:
+#      - self-hosted
+#      #- codebuild-WeatherAPICodeBuildProject-${{ github.run_id }}-${{ github.run_attempt }}
+#    steps:
+#      - run: echo "Hello World"
 
 
-#name: Deploying to EC2 AWS
+name: Deploying to EC2 AWS
 
-#on:
-#  workflow_dispatch:
-#  push:
-#    branches:
-#      - master
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
 
-#env: 
-## set apppool and site name from IIS
-#  AppPoolName : DefaultAppPool
-#  SiteName  : 'Default Web Site'
-#  SitePublishName  :  'DefaultWebSite'
-## set to site files.  In this case, the part of the path after f:/websites/
-#  SitePath :  MainWebsite
+env: 
+# set apppool and site name from IIS
+  AppPoolName : DefaultAppPool
+  SiteName  : 'Default Web Site'
+  SitePublishName  :  'DefaultWebSite'
+# set to site files.  In this case, the part of the path after f:/websites/
+  SitePath :  MainWebsite
 
 #  #TEST_DOTNET_VERSION: "8.0.x"
 
-#jobs:
-#  build:
-#    runs-on: Windows-2022
+jobs:
+  build:
+    runs-on: self-hosted
 
-#    steps:
-#      - name: "Mostrar mensaje"
-#        run: echo "Checkout repo"
+    steps:
+      - name: "Mostrar mensaje"
+        run: echo "Checkout repo"
     
-#      - uses: actions/checkout@v4 
+      - uses: actions/checkout@v4 
   
-#      - name: Build
-#        run: dotnet build --configuration Release .\WeatherAPI
-#      - name: dotnet publish 
-#        run: | 
-#          dotnet publish -c Release -o WeatherAPI .\WeatherAPI
+      - name: Build
+        run: dotnet build --configuration Release .\WeatherAPI
+      - name: dotnet publish 
+        run: | 
+          dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
 #      #- name: Deploy to IIS
 #      #  run: |
