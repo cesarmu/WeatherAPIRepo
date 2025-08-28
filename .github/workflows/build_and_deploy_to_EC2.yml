@@ -8,6 +8,7 @@
 #    steps:
 #      - run: echo "Hello World"
 
+
 name: Deploying to EC2 AWS
 
 on:
