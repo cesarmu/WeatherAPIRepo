@@ -3,7 +3,7 @@ on: [push]
 jobs:
   Hello-World-Job:
     runs-on:
-      - WindowsSelfHostedRunner
+      - self-hosted
       #- codebuild-WeatherAPICodeBuildProject-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - run: echo "Hello World"
