@@ -40,17 +40,17 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x' # Specify the desired .NET SDK version
-        
+      
+      - name: Install AWS CLI (Manual)
+        run: |
+          Invoke-WebRequest -Uri "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+          msiexec /i AWSCLIV2.msi /quiet /norestart 
+          
       - name: Build
         run: dotnet build --configuration Release .\WeatherAPI
       - name: dotnet publish 
         run: | 
-          dotnet publish -c Release -o WeatherAPI .\WeatherAPI
-
-      - name: Install AWS CLI (Manual)
-        run: |
-          Invoke-WebRequest -Uri "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
-          msiexec /i AWSCLIV2.msi /quiet /norestart      
+          dotnet publish -c Release -o WeatherAPI .\WeatherAPI     
           
       - name: copy files to S3
         run: |
