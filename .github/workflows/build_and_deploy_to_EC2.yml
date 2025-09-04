@@ -35,7 +35,12 @@ jobs:
         run: echo "Checkout repo"
     
       - uses: actions/checkout@v4 
-  
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # Specify the desired .NET SDK version
+        
       - name: Build
         run: dotnet build --configuration Release .\WeatherAPI
       - name: dotnet publish 
