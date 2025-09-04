@@ -47,6 +47,9 @@ jobs:
         run: | 
           dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
+      - name: copy files to S3
+        run: |
+          aws s3 cp ./WeatherAPI/* s3://myrunnerbucket-040925/AppVersions/
 
 #      #- name: Deploy to IIS
 #      #  run: |
