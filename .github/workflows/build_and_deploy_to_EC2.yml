@@ -47,6 +47,11 @@ jobs:
         run: | 
           dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
+      - name: Install AWS CLI (Manual)
+        run: |
+          Invoke-WebRequest -Uri "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+          msiexec /i AWSCLIV2.msi /quiet /norestart      
+          
       - name: copy files to S3
         run: |
           aws s3 cp ./WeatherAPI/* s3://myrunnerbucket-040925/AppVersions/
