@@ -42,6 +42,7 @@ jobs:
         run: | 
           dotnet publish -c Release -o WeatherAPI .\WeatherAPI
 
+
 #      #- name: Deploy to IIS
 #      #  run: |
 #      #    iisreset /stop
